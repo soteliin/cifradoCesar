@@ -29,16 +29,17 @@ export class DescifradorComponent {
 
   //2
   descifrarMensaje(form: NgForm): void {
-    this.mensajeDescifrado = "";
+    this.mejorDescifrado = "";
     this.llavePosible = "";
+    this.mensajeDescifrado="";
     //2a
     for (let i = 0; i < this.mensajeCifrado.length; i++) {
       this.letra = this.mensajeCifrado.charAt(i);
       //2b
       for (let j = 0; j < this.latin1Characters.length; j++) {
-        const ascii = this.latin1Characters[j];
+        let asc = this.latin1Characters[j];
         //2c
-        if (this.letra == ascii) {
+        if (this.letra == asc) {
           //2d
           if (j != 32) {
             let descifradoAscii = (j - this.llave) % 256;
@@ -48,8 +49,10 @@ export class DescifradorComponent {
               this.mensajeDescifrado += this.latin1Characters[descifradoAscii];
               //2f
             } else {
-              this.mensajeDescifrado += this.mensajeCifrado[i];
+              this.mensajeDescifrado += this.latin1Characters[descifradoAscii];
             }
+          }else{
+            this.mensajeDescifrado+=" ";
           }
         }
       }
